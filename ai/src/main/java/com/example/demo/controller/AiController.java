@@ -8,11 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/ai")
 @Slf4j
 public class AiController {
-    @Autowired
-    private AiService aiService;
-
     // @Autowired
-    // private AiServiceByChatClient aiService;
+    // private AiService aiService;
+
+    @Autowired
+    private AiServiceByChatClient aiService;
 
     @PostMapping(
             value = "/chat-model",
