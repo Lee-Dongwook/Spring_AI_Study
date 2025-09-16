@@ -1,0 +1,5 @@
+const response = await fetch('/ai/chat-model-stream', { method: 'post', headers:
+{ 'Content-Type': 'application/x-www-form-urlencoded', 'Accept' :
+'application/x-ndjson' }, body: new URLSearchParams({ question }) }) const uuid
+= springai.addAnswerPlaceHolder("chatPanel");
+springai.printAnswerText(response.body, uuid, "chatPanel");

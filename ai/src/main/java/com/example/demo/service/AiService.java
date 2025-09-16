@@ -16,24 +16,37 @@ public class AiService {
                 .text("사용자 질문에 대해 한국어로 답변을 해야 합니다.")
                 .build();
         UserMessage userMessage = UserMessage.builder()
-            .text(question)
+                .text(question)
                 .build();
-        
+
         ChatOptions chatOptions = ChatOptions.builder()
-            .model("gpt-4o-mini")
-            .temperature(0.3)
-            .maxTokens(1000)
-            .build();
-    
+                .model("gpt-4o-mini")
+                .temperature(0.3)
+                .maxTokens(1000)
+                .build();
+
         Prompt prompt = Prompt.builder()
-            .messages(systemMessage, userMessage)
-            .chatOptions(chatOptions)
-            .build();
+                .messages(systemMessage, userMessage)
+                .chatOptions(chatOptions)
+                .build();
 
         ChatResponse chatResponse = chatModel.call(prompt);
         AssistantMessage assistantMessage = chatResponse.getResult().getOutput();
         String answer = assistantMessage.getText();
 
         return answer;
+    }
+    
+    public Flux<String> generateStreamText(String question) {
+        Flux<ChatResponse> fluxResponse = chatModel.stream(prompt);
+        Flux<String> fluxString = fluxResponse.map(chatResponse -> {
+            AssistantMessage assistantMessage = chatResponse.getResult().getOutput();
+            String chunk = assistantMessage.getText();
+            if (chunk == null)
+                chunk = "";
+            return chunk;
+        });
+
+        return fluxString;
     }
 }

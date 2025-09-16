@@ -23,4 +23,14 @@ public class AiController {
         String answerText = aiService.generateText(question);
         return answerText;
     }
+
+    @PostMapping(
+        value="/chat-model-stream",
+        consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+        produces = MediaType.APPLICATION_NDJSON_VALUE
+    )
+    public Flux<String> chatModelStream(@RequestParam("question") String question) {
+        Flux<String> answerStreamText = aiService.generateStreamText(question);
+        return answerStreamText;
+    }
 }
