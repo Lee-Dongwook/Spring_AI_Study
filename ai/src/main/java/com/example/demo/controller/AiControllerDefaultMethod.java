@@ -2,6 +2,8 @@ package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.example.demo.AiServiceDefaultMethod;
+
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
