@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.service;
 
 public class AiServiceFewShotPrompt {
     public String fewShotPrompt(String order) {

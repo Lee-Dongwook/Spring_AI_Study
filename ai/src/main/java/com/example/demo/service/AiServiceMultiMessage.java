@@ -1,4 +1,8 @@
-package com.example.demo;
+package com.example.demo.service;
+
+import java.util.List;
+
+import org.apache.logging.log4j.message.Message;
 
 public class AiServiceMultiMessage {
     public String multiMessage(String question, List<Message> chatMemory) {
